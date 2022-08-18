@@ -26,6 +26,7 @@
  * @property {number} [posY=0] Vertical position of the menu. This value is used only when the menu is fixed on the page. 
  * @property {boolean} [isFixed=false] This value determine if the menu will be fixed on the page. This is usefull in case you're making a web app that needs a menu that is always visible.
  * @property {number} [zIndex=9999] This value determine the order the menu will be displayed on the page. Higher values means that it is in front of elements with lower values. 
+ * @property {string} [animation=animate__rotateIn] This value determine the order the menu will be displayed on the page. Higher values means that it is in front of elements with lower values.
  */
 
 /**
@@ -79,7 +80,7 @@ export default class RadialMenu {
 							shadowOffsetY, backgroundColor, hoverBackgroundColor, borderColor, textColor,
 							hoverTextColor, textBorderColor, textShadowColor, textShadowBlur,
 							textShadowOffsetX, textShadowOffsetY, buttonGap, buttons, hoverAction,
-							posX, posY, isFixed, zIndex} = {}){
+							posX, posY, isFixed, zIndex, animation} = {}){
 		
 		
 		this.state = {};
@@ -165,6 +166,8 @@ export default class RadialMenu {
 		this.isFixed = isFixed || false;
 		
 		this.zIndex = zIndex || 9999;
+
+		this.animation = animation || "animate__rotateIn"
 		
 		this.canvas = document.createElement('canvas');
 		
@@ -187,8 +190,10 @@ export default class RadialMenu {
 		this.h = (this.outerCircle * 2) + (this.shadowStyle.blur * 2) + (this.shadowStyle.offsetY * 2);
 		
 		this.canvas.classList.add("animate__animated")
-		
-		this.canvas.classList.add("animate__bounceIn")
+
+		this.canvas.classList.add("animate__faster")
+
+		this.canvas.classList.add(this.animation)
 
 		this.canvas.style.display = "none";
 		
@@ -427,6 +432,8 @@ export default class RadialMenu {
 		document.oncontextmenu = e => {
 		
 			e.preventDefault();
+
+			this.hide()
 			
 			this.setPos(e.clientX - this.w2, e.clientY - this.h2);
 			
@@ -470,7 +477,6 @@ export default class RadialMenu {
 	}
 	
 	hide(){
-	
 		this.canvas.style.display = "none";
 		
 	}
@@ -478,9 +484,8 @@ export default class RadialMenu {
 	show(){
 	
 		this.draw();
-		
 		this.canvas.style.display = "block";
-		
+
 	}
 	
 	setPos(x, y){
