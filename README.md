@@ -187,6 +187,10 @@ This value determine the order the menu will be displayed on the page. Higher va
 *Default:* 9999
 
 
+**animation** : String
+This value takes a "animate.css" class and applies the animation to the radial menu.
+
+
 **buttons** : Array (of buttons object)  
 You should pass an array with button objects. A button object is a simple object with only two attributes: text and action.  
 
