@@ -186,7 +186,9 @@ export default class RadialMenu {
 		
 		this.h = (this.outerCircle * 2) + (this.shadowStyle.blur * 2) + (this.shadowStyle.offsetY * 2);
 		
-		this.canvas.classList.add("animate__animated animate__bounceIn")
+		this.canvas.classList.add("animate__animated")
+		
+		this.canvas.classList.add("animate__bounceIn")
 
 		this.canvas.style.display = "none";
 		
